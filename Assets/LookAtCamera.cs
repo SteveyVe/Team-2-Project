@@ -17,5 +17,6 @@ public class LookAtCamera : MonoBehaviour
     void Update()
     {
         transform.LookAt(theCam.transform);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }
