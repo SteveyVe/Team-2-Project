@@ -31,6 +31,8 @@ public class minigame : MonoBehaviour
 
     public GameObject axeObject;
 
+    public int count;
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,12 @@ public class minigame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        count++;
+        if (count > 2)
+        {
+            axeObject.SetActive(false);
+        }
+
         move_mover();
         shake_minigame();
         if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
@@ -87,6 +95,7 @@ public class minigame : MonoBehaviour
 
     public void hit_axe()
     {
+        
         if (check_hit()){
             mover_speed *= mult_speed;
             current_hitzone_width *= mult_width;
@@ -96,6 +105,7 @@ public class minigame : MonoBehaviour
             shake_offset = hit_jerk;
             hitzone_v_scale += hit_zone_bop;
             currentCombo += 1.0f;
+            count = 0;
             axeObject.SetActive(true);
         }
         else
@@ -116,4 +126,5 @@ public class minigame : MonoBehaviour
         shake_offset = Mathf.Lerp(shake_offset, 0, Time.deltaTime * 10.0f);
         gameObject.transform.localPosition = origin + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * shake_offset;
     }
+
 }

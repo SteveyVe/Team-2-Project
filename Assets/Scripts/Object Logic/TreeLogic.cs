@@ -33,7 +33,7 @@ public class TreeLogic : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= health;
+        health -= damage;
         
     }
 
