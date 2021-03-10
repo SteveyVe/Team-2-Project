@@ -24,6 +24,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] float jumpForwardAppliedForce = .5f;
     [SerializeField] float airControl = 5f;
     [SerializeField] float stepDown = .2f;
+    [SerializeField] Animator animator;
 
 
     Vector3 velocity;
@@ -35,6 +36,7 @@ public class PlayerMotor : MonoBehaviour
 
     private void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         playerInputs = GetComponent<PlayerInputs>();
         controller = GetComponent<CharacterController>();
     }
@@ -48,6 +50,8 @@ public class PlayerMotor : MonoBehaviour
             _jumpInput = false;
             Jump();
         }
+
+        animator.SetBool("moving", (playerInputs.Movement().magnitude > 0.25f));
     }
 
     private void FixedUpdate()
