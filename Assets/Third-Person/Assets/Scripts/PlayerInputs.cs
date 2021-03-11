@@ -15,6 +15,16 @@ public class PlayerInputs : MonoBehaviour
     public Vector2 Movement()
     {
         Vector2 moveMent = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (moveMent.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            transform.GetChild(1).transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (moveMent.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.GetChild(1).transform.localScale = new Vector3(-1, 1, 1);
+        }
         return moveMent;
     }
 

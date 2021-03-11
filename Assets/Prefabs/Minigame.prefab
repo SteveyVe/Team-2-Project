@@ -246,8 +246,8 @@ MonoBehaviour:
   height: 8
   start_speed: 1
   start_width: 0.3
-  mult_speed: 1.1
-  mult_width: 0.9
+  mult_speed: 1.15
+  mult_width: 1
   hit_jerk: 0.3
   hit_detection_leniency: 0.05
   hit_zone_bop: 2

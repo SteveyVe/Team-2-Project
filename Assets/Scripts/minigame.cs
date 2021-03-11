@@ -34,6 +34,11 @@ public class minigame : MonoBehaviour
 
     public int count;
 
+    public AudioClip woosh1;
+    public AudioClip woosh2;
+    public AudioClip woosh3;
+
+    private AudioSource woosh;
 
     // Start is called before the first frame update
     void Start()
@@ -46,12 +51,12 @@ public class minigame : MonoBehaviour
         update_hitzone();
         mover_speed = start_speed;
         currentCombo = 0;
+        woosh = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (count > 2)
         {
             axeObject.SetActive(false);
@@ -108,7 +113,6 @@ public class minigame : MonoBehaviour
             update_hitzone();
             shake_offset = hit_jerk;
             hitzone_v_scale += hit_zone_bop;
-            currentCombo += 1.0f;
             count = 0;
             axeObject.SetActive(true);
         }
@@ -122,6 +126,23 @@ public class minigame : MonoBehaviour
             shake_offset = 0.0f;
             hitzone_v_scale += miss_zone_bop;
             currentCombo = 0;
+
+            int r = Random.Range(0, 2);
+
+            if (r == 0)
+            {
+                woosh.clip = woosh1;
+            }
+            else if (r == 1)
+            {
+                woosh.clip = woosh2;
+            }
+            else if (r == 2)
+            {
+                woosh.clip = woosh3;
+            }
+            woosh.Play();
+
         }
     }
 

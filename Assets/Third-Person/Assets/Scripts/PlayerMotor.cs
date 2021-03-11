@@ -27,7 +27,6 @@ public class PlayerMotor : MonoBehaviour
     Animator animator;
     public GameObject axe;
 
-
     Vector3 velocity;
 
     float cameraXrotation;
@@ -64,6 +63,9 @@ public class PlayerMotor : MonoBehaviour
     void Jump()
     {
         axe.GetComponent<Animator>().SetTrigger("Chop");
+
+
+
         if (!isJumping)
         {
             isJumping = true;
@@ -103,6 +105,7 @@ public class PlayerMotor : MonoBehaviour
                 }
             }
         }
+        
     }
 
     Vector3 CalculateAirControl()
