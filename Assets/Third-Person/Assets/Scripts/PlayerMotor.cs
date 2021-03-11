@@ -24,7 +24,8 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] float jumpForwardAppliedForce = .5f;
     [SerializeField] float airControl = 5f;
     [SerializeField] float stepDown = .2f;
-    [SerializeField] Animator animator;
+    Animator animator;
+    public GameObject axe;
 
 
     Vector3 velocity;
@@ -44,7 +45,7 @@ public class PlayerMotor : MonoBehaviour
     private void Update()
     {
         playerInputs.JumpInput();
-
+        axe.GetComponent<Animator>().ResetTrigger("Chop");
         if (_jumpInput)
         {
             _jumpInput = false;
@@ -62,6 +63,7 @@ public class PlayerMotor : MonoBehaviour
 
     void Jump()
     {
+        axe.GetComponent<Animator>().SetTrigger("Chop");
         if (!isJumping)
         {
             isJumping = true;
