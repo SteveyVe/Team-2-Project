@@ -22,6 +22,12 @@ public class TreeLogic : MonoBehaviour
     public GameObject player;
     public float renderDistance;
     public float hpRenderDistance;
+    public float maxSwing;
+    public float maxShake;
+
+    private float swingPos;
+    private float swingSpeed;
+    private float shakeAmp;
 
 
     // Start is called before the first frame update
@@ -34,11 +40,21 @@ public class TreeLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        swingSpeed += maxSwing * damage / maxHealth;
+        shakeAmp += maxShake * damage / maxHealth;
         
     }
 
     private void Update()
     {
+        swingSpeed = Mathf.Lerp(swingSpeed, -swingPos*20.0f, Time.deltaTime * 20);
+        swingPos += swingSpeed * Time.deltaTime;
+        transform.localEulerAngles = new Vector3(0,0, swingPos);
+
+        shakeAmp = Mathf.Lerp(shakeAmp, 0.0f, Time.deltaTime * 30);
+        treeStage.transform.localPosition = new Vector3(Random.Range(-1.0f, 1.0f) * shakeAmp, 4.3f,0) ;
+
+
         healthBar.fillAmount = health / maxHealth;
         if (health <= 0)
         {
