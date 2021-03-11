@@ -27,6 +27,11 @@ public class minigame : MonoBehaviour
     private float shake_offset;
     private Vector3 origin;
     private float hitzone_v_scale = 1.0f;
+    [HideInInspector]public float currentCombo = 0;
+
+    public GameObject axeObject;
+
+    public int count;
 
 
     // Start is called before the first frame update
@@ -39,14 +44,21 @@ public class minigame : MonoBehaviour
         current_hitzone_max = current_hitzone_min + current_hitzone_width;
         update_hitzone();
         mover_speed = start_speed;
+        currentCombo = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        count++;
+        if (count > 2)
+        {
+            axeObject.SetActive(false);
+        }
+
         move_mover();
         shake_minigame();
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
         {
             hit_axe();
         }
@@ -83,6 +95,7 @@ public class minigame : MonoBehaviour
 
     public void hit_axe()
     {
+        
         if (check_hit()){
             mover_speed *= mult_speed;
             current_hitzone_width *= mult_width;
@@ -91,6 +104,9 @@ public class minigame : MonoBehaviour
             update_hitzone();
             shake_offset = hit_jerk;
             hitzone_v_scale += hit_zone_bop;
+            currentCombo += 1.0f;
+            count = 0;
+            axeObject.SetActive(true);
         }
         else
         {
@@ -101,6 +117,7 @@ public class minigame : MonoBehaviour
             update_hitzone();
             shake_offset = 0.0f;
             hitzone_v_scale += miss_zone_bop;
+            currentCombo = 0;
         }
     }
 
@@ -109,4 +126,5 @@ public class minigame : MonoBehaviour
         shake_offset = Mathf.Lerp(shake_offset, 0, Time.deltaTime * 10.0f);
         gameObject.transform.localPosition = origin + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * shake_offset;
     }
+
 }

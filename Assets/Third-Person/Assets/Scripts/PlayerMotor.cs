@@ -121,4 +121,7 @@ public class PlayerMotor : MonoBehaviour
             (playerInputs.Movement().y < 0 ? playerInputs.Movement().y / 2f : playerInputs.Movement().y)
                 + Camera.main.transform.right * (playerInputs.Movement().x / 2f));
     }
+
+
+
 }

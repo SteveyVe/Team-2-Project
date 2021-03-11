@@ -20,6 +20,10 @@ public class TreeLogic : MonoBehaviour
     public Image healthBar;
 
 
+    
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +31,9 @@ public class TreeLogic : MonoBehaviour
         health = maxHealth;
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        health -= health;
+        health -= damage;
         
     }
 
