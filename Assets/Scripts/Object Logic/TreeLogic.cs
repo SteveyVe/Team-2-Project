@@ -34,6 +34,8 @@ public class TreeLogic : MonoBehaviour
     public AudioClip fallSound;
     public AudioClip chopSound;
 
+    public GameObject stump;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,9 @@ public class TreeLogic : MonoBehaviour
                 fall.volume = 0.1f;
                 fall.Play();
                 isDead = true;
+                GameObject go = Instantiate(stump);
+                go.transform.localPosition = transform.localPosition;
+                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y - 3.5f, go.transform.position.z);
                 Destroy(gameObject, 3);
             }
             else if (health <= maxHealth * 0.33f)
