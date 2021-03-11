@@ -47,11 +47,11 @@ public class TreeLogic : MonoBehaviour
 
     private void Update()
     {
-        swingSpeed = Mathf.Lerp(swingSpeed, -swingPos*20.0f, Time.deltaTime * 20);
+        swingSpeed = Mathf.Lerp(swingSpeed, -swingPos*20.0f, Time.deltaTime * 10);
         swingPos += swingSpeed * Time.deltaTime;
         transform.localEulerAngles = new Vector3(0,0, swingPos);
 
-        shakeAmp = Mathf.Lerp(shakeAmp, 0.0f, Time.deltaTime * 30);
+        shakeAmp = Mathf.Lerp(shakeAmp, 0.0f, Time.deltaTime * 10);
         treeStage.transform.localPosition = new Vector3(Random.Range(-1.0f, 1.0f) * shakeAmp, 4.3f,0) ;
 
 
